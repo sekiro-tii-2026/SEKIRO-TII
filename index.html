@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    SEKIRO | Structure-Enhanced and Koopman-Integrated Deep Reinforcement Learning Framework for Robot Exploration
+  </title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+    }
+
+    .publication-title {
+      font-family: "Google Sans", sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, #f8fbff 0%, #eef4ff 100%);
+    }
+
+    .publication-authors a {
+      color: #3273dc;
+      text-decoration: none;
+    }
+
+    .publication-authors a:hover {
+      text-decoration: underline;
+    }
+
+    .publication-links .button {
+      margin: 0.25rem 0.3rem;
+    }
+
+    .highlight-tag {
+      font-size: 1.75rem;
+      color: #fff;
+      background-color: #1e88e5;
+      font-weight: 700;
+      padding: 0.5em 0.9em;
+      border-radius: 8px;
+    }
+
+    .section-image {
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      margin: 1rem auto;
+      display: block;
+      max-width: 100%;
+    }
+
+    .section-image-small {
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      margin: 1rem auto;
+      display: block;
+      max-width: 80%;
+    }
+
+    .figure-caption {
+      font-size: 0.95rem;
+      color: #555;
+      text-align: justify;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+
+    .highlight-box {
+      background: #f9fafc;
+      border-left: 4px solid #3273dc;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .metric-card {
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      padding: 1.2rem;
+      height: 100%;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      background: #fff;
+    }
+
+    .metric-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3273dc;
+    }
+
+    .video-wrapper {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      background: #000;
+    }
+
+    .video-wrapper video {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 0;
+    }
+
+    .small-caption {
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .teaser-caption {
+      font-size: 1rem;
+      color: #444;
+      margin-top: 0.75rem;
+    }
+
+    pre {
+      border-radius: 10px;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .footer {
+      padding: 2rem 1.5rem 2rem;
+    }
+
+    .tag.is-paper {
+      background-color: #eef3ff;
+      color: #2959c7;
+    }
+
+    .tag.is-paper.highlight-tag {
+      font-size: 1.75rem !important;
+    }
+
+    .video-grid-caption {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #666;
+      margin-top: 0.75rem;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Table cell centering */
+    .table td, .table th {
+      vertical-align: middle !important;
+      text-align: center !important;
+    }
+
+    /* Table footnote - tighten gap */
+    .table-footnote {
+      margin-top: 0.4rem;
+    }
+    .table-footnote p {
+      margin-bottom: 0 !important;
+      line-height: 1.5;
+      font-size: 0.85rem;
+    }
+    .table-container + .table-footnote {
+      margin-top: 0.4rem;
+    }
+    .table-container {
+      margin-bottom: 0 !important;
+    }
+
+    /* Benchmark method name style */
+    .method-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #363636;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Card height consistency */
+    .columns.is-multiline > .column > .metric-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Section spacing */
+    .section {
+      padding: 3rem 1.5rem;
+    }
+
+    /* Wider content area */
+    .container.is-max-desktop {
+      max-width: 1100px;
+    }
+
+    /* Title spacing */
+    .title {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Mobile responsive */
+    @media screen and (max-width: 768px) {
+      .publication-title {
+        font-size: 1.5rem !important;
+      }
+      .highlight-tag {
+        font-size: 1.2rem !important;
+      }
+      .metric-number {
+        font-size: 1.5rem;
+      }
+      .metric-card {
+        margin-bottom: 1rem;
+      }
+      .table {
+        font-size: 0.8rem;
+      }
+      .table td, .table th {
+        padding: 0.4rem 0.3rem;
+      }
+      .video-wrapper video {
+        max-height: 200px;
+      }
+      .section-image-small {
+        max-width: 100%;
+      }
+    }
+
+    /* Video legend */
+    .video-legend {
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .video-legend span {
+      margin: 0 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        <strong>SEKIRO</strong>
+      </a>
+    </div>
+
+    <div class="navbar-menu is-active">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="#abstract">Abstract</a>
+        <a class="navbar-item" href="#contributions">Contributions</a>
+        <a class="navbar-item" href="#method">Method</a>
+        <a class="navbar-item" href="#experiments">Simulation Experiments</a>
+        <a class="navbar-item" href="#realworld">Real-World Experiments</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Title -->
+  <section class="hero hero-banner">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <h1 class="title is-1 publication-title">
+              SEKIRO: A Structure-Enhanced and Koopman-Integrated
+              Deep Reinforcement Learning Framework
+              for Robot Exploration
+            </h1>
+
+            <h2 class="subtitle is-4" style="margin-top: 1rem;">
+              <span class="tag is-paper highlight-tag">IEEE Transactions on Industrial Informatics (TII) 2026<br>(Manuscript ID: TII-26-6546)</span>
+            </h2>
+
+            <div class="column has-text-centered" style="margin-top: 0.4rem;">
+              <div class="publication-links">
+                <a href="manuscript.pdf" target="_blank" class="button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+
+                <a href="https://youtu.be/AKWq4K_Xppc" target="_blank" class="button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-film"></i></span>
+                  <span>Video</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="is-size-4" style="margin-top: 1rem;">
+              Non-myopic robot exploration through <strong>spatial-temporal reasoning</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract (First) -->
+  <section class="section hero is-light" id="abstract">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+          <h2 class="title is-3">Abstract</h2>
+      </div>
+          <div class="content has-text-justified">
+            <p>
+              Autonomous exploration of unknown environments remains challenging for mobile robots, primarily due to myopic
+              decision-making and limited long-term planning capability. Existing methods frequently decouple spatial
+              perception from historical information, leading to redundant revisits and degraded exploration efficiency.
+            </p>
+            <p>
+              To address these challenges, we propose <strong>SEKIRO</strong>, a <strong>Structure-Enhanced and Koopman-Integrated
+              Deep Reinforcement Learning framework</strong> that unifies spatial and temporal reasoning for sustained exploration.
+              Specifically, a <strong>GNN-based spatial embedding block</strong> captures multi-scale region dependencies through
+              skeleton-driven region division and a structural encroaching strategy. A <strong>Koopman operator-based temporal
+              embedding block</strong> encodes the evolution of exploration history into a linear latent space via a quasi-diagonal
+              state matrix, enabling efficient long-horizon reasoning. An <strong>attention-integrated policy network</strong> fuses
+              these representations for non-myopic decision-making, with a dual-stage planning scheme generating precise local exploration
+              paths and global guidance paths.
+            </p>
+            <p>
+              Extensive simulations are carried out in three different environments. The results demonstrate that SEKIRO achieves
+              superior exploration efficiency, coverage completeness, and runtime balance over state-of-the-art benchmarks. Real-world
+              experiments further validate the practical feasibility of the proposed framework.
+            </p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Contributions (Second) - 对应论文中的贡献 -->
+  <section class="section" id="contributions">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Key Contributions</h2>
+      </div>
+
+      <div class="highlight-box">
+        <ol style="margin-left: 1.5rem;">
+          <li style="margin-bottom: 0.8rem;">
+            <strong>A GNN-based spatial embedding network</strong> is developed to capture spatial and multi-scale dependencies
+            across exploring regions, in which a skeleton-driven region division mechanism is proposed to generate
+            topology-consistent regions and beacon points, while a structural encroaching strategy is proposed to
+            quantify regional structural features.
+          </li>
+          <li style="margin-bottom: 0.8rem;">
+            <strong>A Koopman operator-based temporal embedding network</strong> is designed to extract temporal features from
+            historical exploration information, where the temporal evolution of node features on the incremental sparse
+            topological graph is encoded into a linear latent space, enabling efficient long-horizon temporal reasoning
+            and improving the consistency of sequential exploration decisions.
+          </li>
+          <li style="margin-bottom: 0.8rem;">
+            <strong>An attention integrated DRL policy</strong> is constructed to jointly exploit graph spatial and temporal
+            features for non-myopic decision-making, over which a dual-stage planning scheme is performed to restore
+            regional structural details from the target point and generate high-precision local exploration paths,
+            while maintaining global connectivity and exploration continuity through fast graph-based search among
+            unexplored regions.
+          </li>
+          <!-- <li>
+            <strong>The proposed framework</strong> is evaluated in extensive simulation scenarios, demonstrating significant
+            performance improvements over state-of-the-art benchmarks. Real-world experiments further validate the
+            effectiveness and practical applicability of the proposed method.
+          </li> -->
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method Overview (Third) - 合并Overview和Method -->
+  <section class="section" id="method">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Method Overview</h2>
+      </div>
+
+      <img src="assets/images/Architecture.png" alt="SEKIRO Architecture" class="section-image">
+      <p class="figure-caption"><strong>Fig. 1.</strong> Overview of the proposed SEKIRO framework with three individual blocks: Node Spatial Embedding Block, Node Temporal Embedding Block, and Policy and Planning Block.</p>
+
+      <div class="content has-text-justified">
+        <p>
+          <strong>SEKIRO</strong> is a structure-enhanced and Koopman-integrated deep reinforcement learning framework that
+          unifies <strong>spatial and temporal reasoning</strong> for non-myopic robot exploration.
+          It captures multi-scale region dependencies through a GNN-based spatial embedding block and
+          encodes exploration history into a linear latent space via a Koopman operator,
+          enabling efficient long-horizon planning.
+          <br><br>
+          <strong>SEKIRO</strong> consists of three main components:
+        </p>
+
+        <p>
+          <strong>(1) Spatial Embedding Block</strong>: A skeleton-driven region division constructs a sparse global graph
+          <em>G<sub>g</sub></em>, and a structural encroaching strategy quantifies regional features into a comprehensive descriptor.
+          A cascaded GNN (GCN + GATv2) captures multi-scale spatial dependencies across regions.
+        </p>
+
+        <p>
+          <strong>(2) Temporal Embedding Block</strong>: A Knowledge Pool stores historical information, and a Multi-EMA mechanism 
+          refines exploration knowledge. A quasi-diagonal formed Koopman operator encodes temporal evolution into a linear latent 
+          space, enabling efficient long-horizon reasoning.
+        </p>
+
+        <p>
+          <strong>(3) Policy and Planning Block</strong>: An attention mechanism fuses the robot's current state with both spatial
+          and temporal embeddings for navigation point determination. A dual-stage planning scheme generates a high-precision local 
+          exploration path along encroaching layers and a global guidance path using ATSP on the global graph.
+        </p>
+      </div>
+
+      <img src="assets/images/Encroaching.png" alt="Structural Encroaching" class="section-image-small">
+      <p class="figure-caption"><strong>Fig. 2.</strong> Schematic of region division and structural encroaching. (a) Divided regions and beacon points based on skeleton. (b) Visibility contour and structural encroaching layers. (c) Expansion of global graph <em>G<sub>g</sub></em>.</p>
+      <img src="assets/images/dual-stage planning.png" alt="Dual-stage Planning" class="section-image-small">
+      <p class="figure-caption"><strong>Fig. 3.</strong> Schematic of dual-stage planning.</p>
+    </div>
+  </section>
+
+  <!-- Key Results
+  <section class="section" id="results">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Key Results (Indoor)</h2>
+      </div>
+
+      <div class="columns is-multiline">
+        <div class="column is-3">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">99.12%</div>
+            <p><strong>Coverage Rate</strong></p>
+            <p class="small-caption">Exploration completeness</p>
+          </div>
+        </div>
+
+        <div class="column is-3">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">0.072s</div>
+            <p><strong>Runtime</strong></p>
+            <p class="small-caption">Per-iteration computation time</p>
+          </div>
+        </div>
+
+        <div class="column is-3">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">592.39s</div>
+            <p><strong>Exploration Time</strong></p>
+            <p class="small-caption">Fastest among all methods</p>
+          </div>
+        </div>
+
+        <div class="column is-3">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">Zero-Shot</div>
+            <p><strong>Real-World Transfer</strong></p>
+            <p class="small-caption">Direct deployment without retraining</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- Simulation Experiments -->
+  <section class="section" id="experiments">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Simulation Experiments</h2>
+      </div>
+
+      <div class="has-text-centered" style="margin-top: 2rem;">
+        <h3 class="title is-5">Environments</h3>
+      </div>
+      <div class="columns is-multiline">
+        <div class="column is-4">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">Indoor</div>
+            <p><strong>70m×70m</strong></p>
+            <p class="small-caption">Office-like corridors and rooms <br> max area: 3500 m²</p>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">Tunnel</div>
+            <p><strong>330m×250m</strong></p>
+            <p class="small-caption">Long narrow passages <br> max area: 22000 m²</p>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">Forest</div>
+            <p><strong>150m×150m</strong></p>
+            <p class="small-caption">Large-scale outdoor topology <br> max area: 22300 m²</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="has-text-centered" style="margin-top:1.5rem;">
+        <h3 class="title is-5">Benchmarks</h3>
+      </div>
+      <div class="columns is-multiline">
+        <div class="column is-4">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">TARE</div>
+            <p>Hierarchical framework for exploring complex 3D environments</p>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">FAEL</div>
+            <p>Fast autonomous exploration for large-scale environments</p>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="metric-card has-text-centered">
+            <div class="metric-number">DRLE</div>
+            <p>Deep reinforcement learning-based large-scale robot exploration</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Performance Comparison -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Performance Comparison</h2>
+      </div>
+
+      <img src="assets/images/Simulation_result.png" alt="Simulation Results" class="section-image">
+      <p class="figure-caption"><strong>Fig. 4.</strong> Simulation environments and representative exploration results. Left: Top-down views of the three simulation scenarios (Indoor, Tunnel, and Forest). Right: Representative exploration trajectories and the corresponding point-cloud maps produced by each comparative method.</p>
+      <img src="assets/images/distance_volumn.png" alt="Distance and Volume Analysis" class="section-image">
+      <p class="figure-caption"><strong>Fig. 5.</strong> Exploration process curves across three scenarios. Row 1: Explored area over movement distance (EA-MD). Row 2: Explored area over time (EA-T). Row 3: Per-iteration computation time over time (PC-T). Shaded regions indicate standard deviation across 10 trials. Columns from left to right: Indoor, Tunnel, Forest.</p>
+
+      <div class="content has-text-justified">
+        <p>
+          The quantitative results across three scenarios are summarized in Table I.
+          SEKIRO achieves the best coverage rate while maintaining competitive exploration efficiency and runtime.
+          In the Indoor scenario, SEKIRO completes exploration in 592.39s with 723.74m movement distance, outperforming all baselines.
+          In the larger Tunnel and Forest scenarios, SEKIRO consistently demonstrates superior performance in both coverage and efficiency.
+        </p>
+      </div>
+
+      <!-- Table I: Quantitative Comparison -->
+      <div class="has-text-centered" style="margin-top: 2rem;">
+        <h3 class="title is-4">TABLE I: Quantitative Comparison of Exploration Performance Across Three Scenarios</h3>
+      </div>
+      <div class="table-container">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th rowspan="2">Scenarios<br>/ Size (m²)<br>/ Max area<sup>1</sup> (m²)</th>
+              <th rowspan="2">Methods</th>
+              <th colspan="2">Exploration Time (s) ↓</th>
+              <th colspan="2">Movement Distance (m) ↓</th>
+              <th colspan="2">Algorithm Runtime (s) ↓</th>
+              <th>Coverage Rate<sup>2</sup> (%) ↑</th>
+            </tr>
+            <tr>
+              <th>Avg</th>
+              <th>Std</th>
+              <th>Avg</th>
+              <th>Std</th>
+              <th>Avg</th>
+              <th>Std</th>
+              <th>Avg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="4"><strong>Indoor</strong><br>70m×70m<br>3500</td>
+              <td>TARE</td>
+              <td>770.67</td>
+              <td>63.46</td>
+              <td>1166.61</td>
+              <td>83.54</td>
+              <td>0.470</td>
+              <td>0.012</td>
+              <td><u>98.96</u></td>
+            </tr>
+            <tr>
+              <td>FAEL</td>
+              <td><u>608.95</u></td>
+              <td>113.72</td>
+              <td><strong>698.93</strong></td>
+              <td>124.02</td>
+              <td><strong>0.018</strong></td>
+              <td><strong>0.003</strong></td>
+              <td>96.97</td>
+            </tr>
+            <tr>
+              <td>DRLE</td>
+              <td>619.93</td>
+              <td>108.61</td>
+              <td>829.83</td>
+              <td>161.83</td>
+              <td>0.110</td>
+              <td>0.005</td>
+              <td>92.41</td>
+            </tr>
+            <tr>
+              <td><strong>SEKIRO</strong></td>
+              <td><strong>592.39</strong></td>
+              <td><strong>62.08</strong></td>
+              <td><u>723.74</u></td>
+              <td><strong>37.59</strong></td>
+              <td><u>0.072</u></td>
+              <td><u>0.004</u></td>
+              <td><strong>99.12</strong></td>
+            </tr>
+            <tr>
+              <td rowspan="4"><strong>Tunnel</strong><br>330m×250m<br>22000</td>
+              <td>TARE</td>
+              <td>3086.88</td>
+              <td>291.33</td>
+              <td>5074.48</td>
+              <td>249.87</td>
+              <td>0.338</td>
+              <td>0.112</td>
+              <td><u>98.52</u></td>
+            </tr>
+            <tr>
+              <td>FAEL</td>
+              <td>2949.01</td>
+              <td>236.50</td>
+              <td><u>4135.23</u></td>
+              <td>374.02</td>
+              <td><strong>0.029</strong></td>
+              <td><strong>0.018</strong></td>
+              <td>96.27</td>
+            </tr>
+            <tr>
+              <td>DRLE<sup>†</sup></td>
+              <td>3394.42</td>
+              <td>332.74</td>
+              <td>5308.95</td>
+              <td>206.36</td>
+              <td>0.275</td>
+              <td>0.063</td>
+              <td>98.35</td>
+            </tr>
+            <tr>
+              <td><strong>SEKIRO</strong></td>
+              <td><strong>2890.81</strong></td>
+              <td><strong>227.56</strong></td>
+              <td><strong>3472.68</strong></td>
+              <td><strong>198.83</strong></td>
+              <td><u>0.194</u></td>
+              <td><u>0.052</u></td>
+              <td><strong>98.82</strong></td>
+            </tr>
+            <tr>
+              <td rowspan="4"><strong>Forest</strong><br>150m×150m<br>22300</td>
+              <td>TARE</td>
+              <td><u>768.23</u></td>
+              <td>66.70</td>
+              <td>1387.93</td>
+              <td>74.27</td>
+              <td>0.215</td>
+              <td><strong>0.007</strong></td>
+              <td><u>98.56</u></td>
+            </tr>
+            <tr>
+              <td>FAEL</td>
+              <td>1083.82</td>
+              <td>172.31</td>
+              <td>1527.62</td>
+              <td>251.54</td>
+              <td><strong>0.055</strong></td>
+              <td><u>0.008</u></td>
+              <td>96.17</td>
+            </tr>
+            <tr>
+              <td>DRLE</td>
+              <td>828.54</td>
+              <td>149.83</td>
+              <td><u>1332.95</u></td>
+              <td>284.64</td>
+              <td>0.231</td>
+              <td>0.212</td>
+              <td>96.48</td>
+            </tr>
+            <tr>
+              <td><strong>SEKIRO</strong></td>
+              <td><strong>760.21</strong></td>
+              <td><strong>34.56</strong></td>
+              <td><strong>1323.71</strong></td>
+              <td><strong>83.98</strong></td>
+              <td><u>0.151</u></td>
+              <td>0.029</td>
+              <td><strong>98.89</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-footnote">
+        <p class="small-caption">
+          <sup>1</sup> Max area: <em>M<sub>env</sub> \ M<sub>unrc</sub></em>, the maximum area that can be observed theoretically.<br>
+          <sup>2</sup> Coverage rate: ratio of actual explored area to max area when exploration stops.<br>
+          <sup>†</sup> There exist failed trials due to timeout; only successful cases are included.<br>
+          <strong>Bold</strong>: the best result. <u>Underlined</u>: the second-best result.
+        </p>
+      </div>
+
+      <!-- Table II: Ablation Study -->
+      <div class="has-text-centered" style="margin-top: 3rem;">
+        <h3 class="title is-4">TABLE II: Quantitative Results of Ablation Studies in Indoor Scenario</h3>
+      </div>
+      <div class="table-container">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th rowspan="2">Methods</th>
+              <th colspan="2">Exploration Time (s) ↓</th>
+              <th colspan="2">Movement Distance (m) ↓</th>
+              <th colspan="2">Algorithm Runtime (s) ↓</th>
+              <th>Coverage Rate (%) ↑</th>
+            </tr>
+            <tr>
+              <th>Avg</th>
+              <th>Std</th>
+              <th>Avg</th>
+              <th>Std</th>
+              <th>Avg</th>
+              <th>Std</th>
+              <th>Avg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>O¬T</td>
+              <td>887.02</td>
+              <td>118.23</td>
+              <td>783.90</td>
+              <td>168.37</td>
+              <td>0.069</td>
+              <td>0.012</td>
+              <td>95.42</td>
+            </tr>
+            <tr>
+              <td>O¬S</td>
+              <td>1006.06</td>
+              <td>133.40</td>
+              <td><u>771.92</u></td>
+              <td><u>59.44</u></td>
+              <td><strong>0.061</strong></td>
+              <td>0.017</td>
+              <td>93.51</td>
+            </tr>
+            <tr>
+              <td>O¬DP</td>
+              <td><u>647.46</u></td>
+              <td><u>90.56</u></td>
+              <td>866.08</td>
+              <td>220.01</td>
+              <td>0.079</td>
+              <td>0.014</td>
+              <td><u>95.71</u></td>
+            </tr>
+            <tr>
+              <td><strong>SEKIRO</strong></td>
+              <td><strong>592.39</strong></td>
+              <td><strong>62.08</strong></td>
+              <td><strong>723.74</strong></td>
+              <td><strong>37.59</strong></td>
+              <td><u>0.072</u></td>
+              <td><strong>0.004</strong></td>
+              <td><strong>99.12</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-footnote">
+        <p class="small-caption">
+          <strong>O¬T</strong>: Ours without temporal embedding block<br>
+          <strong>O¬S</strong>: Ours without spatial embedding block<br>
+          <strong>O¬DP</strong>: Ours without dual-stage planning<br>
+          <strong>Bold</strong>: the best result. <u>Underlined</u>: the second-best result.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulation Demonstration -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Simulation Demonstrations</h2>
+      </div>
+
+      <!-- Indoor -->
+      <h3 class="title is-5" style="margin-top:1.5rem;">Indoor (Speed x8)</h3>
+      <p class="video-legend">
+        <span>TARE</span> ·
+        <span>FAEL</span> ·
+        <span>DRLE</span> ·
+        <span style="color:#3273dc; font-weight:600;">SEKIRO</span> ·
+        <span>Progress Curves</span>
+      </p>
+      <div class="columns is-multiline" id="scene-indoor">
+        <div class="column is-4">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/TARE_8.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/FAEL_8.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/DRLE_8.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/SEKIRO_8.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/animated_area_Indoor.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tunnel -->
+      <h3 class="title is-5" style="margin-top:1.5rem;">Tunnel (Speed x32)</h3>
+      <p class="video-legend">
+        <span>TARE</span> ·
+        <span>FAEL</span> ·
+        <span>DRLE</span> ·
+        <span style="color:#3273dc; font-weight:600;">SEKIRO</span> ·
+        <span>Progress Curves</span>
+      </p>
+      <div class="columns is-multiline" id="scene-tunnel">
+        <div class="column is-4">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/TARE_32.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/FAEL_32.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/DRLE_32.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/SEKIRO_32.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/animated_area_Tunnel.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Forest -->
+      <h3 class="title is-5" style="margin-top:1.5rem;">Forest (Speed x12)</h3>
+      <p class="video-legend">
+        <span>TARE</span> ·
+        <span>FAEL</span> ·
+        <span>DRLE</span> ·
+        <span style="color:#3273dc; font-weight:600;">SEKIRO</span> ·
+        <span>Progress Curves</span>
+      </p>
+      <div class="columns is-multiline" id="scene-forest">
+        <div class="column is-4">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/TARE_12.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/FAEL_12.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/DRLE_12.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/SEKIRO_12.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="video-wrapper">
+            <video controls playsinline muted>
+              <source src="assets/videos/animated_area_Forest.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real-world Experiments -->
+  <section class="section" id="realworld">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Real-World Experiments</h2>
+      </div>
+
+      <img src="assets/images/Real-world result.png" alt="Real-world Experiments" class="section-image">
+      <p class="figure-caption"><strong>Fig. 6.</strong> Real-world experiment scenes and exploration results. (a, c) Schematics of Loop and Hall environments reconstructed using a handheld scanner, with representative real-world views and non-traversable areas (e.g., stairs and slopes) annotated. (b, d) Exploration results, showing the trajectory and the constructed point cloud map. (e) The Scout Mini wheeled robot and onboard sensors.</p>
+
+      <div class="content has-text-justified">
+        <p>
+          To validate practical applicability, we conduct field experiments using a <strong>Scout Mini wheeled robot</strong>
+          equipped with an onboard PC (i5-1340P CPU and 16 GB of RAM), an MTI-30 IMU, and an RS-LiDAR-32.
+          The terrain map in [15] is adopted for traversability analysis, and the trained model is deployed in a
+          <strong>zero-shot manner</strong> without additional tuning or retraining.
+          All computations were run onboard, with max velocity limited to <strong>0.6m/s</strong> for safety.
+        </p>
+        <p>
+          <strong>Experimental Environments:</strong>
+        </p>
+        <ul>
+          <li><strong>Loop</strong>: Loop-shaped corridor with intersections — completed in 373.10s, 163.38m movement, covering 2153.38m²</li>
+          <li><strong>Hall</strong>: Building entrance hall with spatial scale variations — completed in 172.04s, 79.64m movement, covering 5284.63m²</li>
+        </ul>
+        <p>
+          Results demonstrate that SEKIRO generates effective exploration strategies at intersections
+          and handles rapid changes in spatial scale, validating the practical feasibility and
+          zero-shot capability of the proposed framework.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Videos -->
+  <section class="section">
+    <div class="container is-max-desktop" id="video">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Real-World Demonstrations</h2>
+      </div>
+
+      <div class="columns is-multiline">
+        <div class="column is-6">
+          <div class="video-wrapper">
+            <video controls playsinline muted loop>
+              <source src="assets/videos/Loop.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p class="video-grid-caption">Real-world Scene1: <strong>Loop</strong> (Speed x8)</p>
+        </div>
+
+        <div class="column is-6">
+          <div class="video-wrapper">
+            <video controls playsinline muted loop>
+              <source src="assets/videos/Hall.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p class="video-grid-caption">Real-world Scene2: <strong>Hall</strong> (Speed x4)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real-world sync: play/pause together, loop independently -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var rwSection = document.getElementById('realworld');
+      if (!rwSection) return;
+      var videos = Array.from(rwSection.querySelectorAll('video'));
+      if (videos.length === 0) return;
+      var lockTimer = null;
+      function lock(ms) {
+        clearTimeout(lockTimer);
+        lockTimer = setTimeout(function() { lockTimer = null; }, ms);
+      }
+      function isLocked() { return lockTimer !== null; }
+      videos.forEach(function(v) {
+        v.addEventListener('play', function() {
+          if (isLocked()) return;
+          lock(300);
+          videos.forEach(function(vid) { if (vid.paused && !vid.ended) vid.play(); });
+        });
+        v.addEventListener('pause', function() {
+          if (isLocked() || v.ended) return;
+          lock(300);
+          videos.forEach(function(vid) { vid.pause(); });
+        });
+      });
+    });
+  </script>
+
+  <!-- Conclusion -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Conclusion</h2>
+      </div>
+
+      <div class="content has-text-justified">
+        <p>
+          In this work, we proposed <strong>SEKIRO</strong>, a structure-enhanced and Koopman-integrated deep reinforcement learning framework
+          for robot exploration of unknown environments. Rather than treating spatial perception and temporal reasoning in isolation,
+          SEKIRO encodes multi-scale region dependencies through a skeleton-driven region division and a structural encroaching strategy,
+          while simultaneously capturing the evolution of exploration history in a linear latent space derived from the Koopman operator.
+          An attention mechanism fuses these spatial and temporal representations to support non-myopic decision-making, and a dual-stage
+          planning scheme further generates high-precision local exploration paths while maintaining global connectivity and exploration
+          continuity across unexplored regions. Extensive simulations across three representative scenarios demonstrate that SEKIRO
+          achieves superior coverage, efficiency, and responsiveness compared to state-of-the-art benchmarks. Real-world experiments
+          further validate its practicality and potential for application in industrial intelligent systems.
+        </p>
+        <p>
+          Nevertheless, the current framework is designed for a single robot operating in static environments, which may restrict its
+          applicability to more complex real-world scenarios. Future work will extend SEKIRO to a multi-robot system and integrate
+          vision-language models (VLMs) to enable semantic-aware decision-making that adapts to dynamic and semantically rich environments.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BibTeX -->
+  <!-- <section class="section" id="bibtex">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{sekire2026,
+  title={SEKIRO: A Structure-Enhanced and Koopman-Integrated Deep Reinforcement Learning Framework for Robot Exploration},
+  author={Author Names},
+  journal={IEEE Transactions on Industrial Informatics},
+  year={2026}
+}</code></pre>
+    </div>
+  </section> -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sceneIds = ['scene-indoor', 'scene-tunnel', 'scene-forest'];
+
+      sceneIds.forEach(function(sceneId) {
+        const container = document.getElementById(sceneId);
+        if (!container) return;
+        const videos = Array.from(container.querySelectorAll('video'));
+        if (videos.length === 0) return;
+
+        const ended = new Array(videos.length).fill(false);
+        let hasStarted = false;
+        let lockTimer = null;
+
+        function lock(ms) {
+          clearTimeout(lockTimer);
+          lockTimer = setTimeout(function() { lockTimer = null; }, ms);
+        }
+        function isLocked() { return lockTimer !== null; }
+
+        videos.forEach(function(v) {
+          v.addEventListener('timeupdate', function() {
+            hasStarted = true;
+          });
+
+          // Stall: buffering → pause all
+          v.addEventListener('waiting', function() {
+            if (!hasStarted || isLocked()) return;
+            lock(300);
+            videos.forEach(function(vid) { vid.pause(); });
+          });
+
+          // Stall recovered → resume all
+          v.addEventListener('canplay', function() {
+            if (!hasStarted || isLocked()) return;
+            lock(300);
+            videos.forEach(function(vid) {
+              if (vid.paused && !vid.ended) vid.play();
+            });
+          });
+
+          // User click play on one → play all
+          v.addEventListener('play', function() {
+            if (isLocked()) return;
+            lock(300);
+            videos.forEach(function(vid) {
+              if (vid.paused && !vid.ended) vid.play();
+            });
+          });
+
+          // User click pause on one → pause all
+          v.addEventListener('pause', function() {
+            if (isLocked() || v.ended) return;
+            lock(300);
+            videos.forEach(function(vid) { vid.pause(); });
+          });
+        });
+
+        // Loop: all ended → restart together
+        videos.forEach(function(v, i) {
+          v.addEventListener('ended', function() {
+            ended[i] = true;
+            if (ended.every(function(e) { return e; })) {
+              hasStarted = false;
+              lock(500);
+              videos.forEach(function(vid, j) {
+                vid.currentTime = 0;
+                ended[j] = false;
+              });
+              videos.forEach(function(vid) { vid.play(); });
+            }
+          });
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
